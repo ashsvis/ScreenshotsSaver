@@ -114,7 +114,7 @@ namespace ScreenshotsSaver
                             using (var canv = Graphics.FromImage(image))
                             {
                                 canv.DrawImage(pastedObject, 0f, 0f,
-                                    new Rectangle(location, size), GraphicsUnit.Point);
+                                    new Rectangle(location, size), GraphicsUnit.Pixel);
                             }
                             image.Save(fileName, ImageFormat.Png);
                         }
@@ -131,18 +131,22 @@ namespace ScreenshotsSaver
         {
             miTuningBorder.Enabled = false;
             var frm = new BorderSelectorForm();
+            frm.Resize += Frm_Resize;
             if (Properties.Settings.Default.UseSelectedBorder)
             {
                 frm.Location = Properties.Settings.Default.SelectedLocation;
                 frm.Size = Properties.Settings.Default.SelectedSize;
             }
-            if (frm.ShowDialog(this) == DialogResult.OK)
-            {
-                Properties.Settings.Default.SelectedLocation = frm.Location;
-                Properties.Settings.Default.SelectedSize = frm.Size;
-                Properties.Settings.Default.Save();
-            }
+            frm.ShowDialog(this);
             miTuningBorder.Enabled = true;
+        }
+
+        private void Frm_Resize(object sender, EventArgs e)
+        {
+            var frm = (BorderSelectorForm)sender;
+            Properties.Settings.Default.SelectedLocation = frm.Location;
+            Properties.Settings.Default.SelectedSize = frm.Size;
+            Properties.Settings.Default.Save();
         }
 
         private void contextNotifyIcon_Opening(object sender, System.ComponentModel.CancelEventArgs e)
