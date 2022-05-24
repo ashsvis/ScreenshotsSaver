@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BorderSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BorderSelectorForm.Designer.cs">
+      <DependentUpon>BorderSelectorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     <Compile Include="TuningForm.Designer.cs">
       <DependentUpon>TuningForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BorderSelectorForm.resx">
+      <DependentUpon>BorderSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -31,39 +31,42 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.contextNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miTuning = new System.Windows.Forms.ToolStripMenuItem();
+            this.miTuningFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.miTuningBorder = new System.Windows.Forms.ToolStripMenuItem();
             this.contextNotifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextNotifyIcon
             // 
             this.contextNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miTuning,
+            this.miTuningFolder,
+            this.miTuningBorder,
             this.toolStripMenuItem1,
             this.miClose});
             this.contextNotifyIcon.Name = "contextMenuStrip1";
-            this.contextNotifyIcon.Size = new System.Drawing.Size(142, 54);
+            this.contextNotifyIcon.Size = new System.Drawing.Size(177, 76);
+            this.contextNotifyIcon.Opening += new System.ComponentModel.CancelEventHandler(this.contextNotifyIcon_Opening);
             // 
-            // miTuning
+            // miTuningFolder
             // 
-            this.miTuning.Name = "miTuning";
-            this.miTuning.Size = new System.Drawing.Size(141, 22);
-            this.miTuning.Text = "Настроить...";
-            this.miTuning.Click += new System.EventHandler(this.miTuning_Click);
+            this.miTuningFolder.Name = "miTuningFolder";
+            this.miTuningFolder.Size = new System.Drawing.Size(176, 22);
+            this.miTuningFolder.Text = "Настроить папку...";
+            this.miTuningFolder.Click += new System.EventHandler(this.miTuning_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 6);
             // 
             // miClose
             // 
             this.miClose.Name = "miClose";
-            this.miClose.Size = new System.Drawing.Size(141, 22);
+            this.miClose.Size = new System.Drawing.Size(176, 22);
             this.miClose.Text = "Выгрузить";
             this.miClose.Click += new System.EventHandler(this.miClose_Click);
             // 
@@ -77,6 +80,13 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // miTuningBorder
+            // 
+            this.miTuningBorder.Name = "miTuningBorder";
+            this.miTuningBorder.Size = new System.Drawing.Size(176, 22);
+            this.miTuningBorder.Text = "Выбор области...";
+            this.miTuningBorder.Click += new System.EventHandler(this.miTuningBorder_Click);
             // 
             // MainForm
             // 
@@ -104,11 +114,12 @@
         #endregion
 
         private System.Windows.Forms.ContextMenuStrip contextNotifyIcon;
-        private System.Windows.Forms.ToolStripMenuItem miTuning;
+        private System.Windows.Forms.ToolStripMenuItem miTuningFolder;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem miClose;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem miTuningBorder;
     }
 }
 

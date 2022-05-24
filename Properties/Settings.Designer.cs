@@ -34,5 +34,41 @@ namespace ScreenshotsSaver.Properties {
                 this["SelectedPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseSelectedBorder {
+            get {
+                return ((bool)(this["UseSelectedBorder"]));
+            }
+            set {
+                this["UseSelectedBorder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point SelectedLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["SelectedLocation"]));
+            }
+            set {
+                this["SelectedLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Size SelectedSize {
+            get {
+                return ((global::System.Drawing.Size)(this["SelectedSize"]));
+            }
+            set {
+                this["SelectedSize"] = value;
+            }
+        }
     }
 }

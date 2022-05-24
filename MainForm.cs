@@ -69,9 +69,13 @@ namespace ScreenshotsSaver
         {
             var frm = new TuningForm();
             frm.Build(Properties.Settings.Default.SelectedPath);
+            if (Properties.Settings.Default.UseSelectedBorder)
+                frm.Build(Properties.Settings.Default.UseSelectedBorder, 
+                    new Rectangle(Properties.Settings.Default.SelectedLocation, Properties.Settings.Default.SelectedSize));
             if (frm.ShowDialog(this) == DialogResult.OK)
             {
                 Properties.Settings.Default.SelectedPath = frm.SelectedPath;
+                Properties.Settings.Default.UseSelectedBorder = frm.UseSelectedBorder;
                 Properties.Settings.Default.Save();
             }
         }
@@ -100,11 +104,50 @@ namespace ScreenshotsSaver
                     var fileName = Path.Combine(path, $"{npp}.png");
                     while (File.Exists(fileName))
                         fileName = Path.Combine(path, $"{++npp}.png");
-                    pastedObject.Save(fileName, ImageFormat.Png);
+
+                    if (Properties.Settings.Default.UseSelectedBorder)
+                    {
+                        var size = Properties.Settings.Default.SelectedSize;
+                        var location = Properties.Settings.Default.SelectedLocation;
+                        using (var image = new Bitmap(size.Width, size.Height))
+                        {
+                            using (var canv = Graphics.FromImage(image))
+                            {
+                                canv.DrawImage(pastedObject, 0f, 0f,
+                                    new Rectangle(location, size), GraphicsUnit.Point);
+                            }
+                            image.Save(fileName, ImageFormat.Png);
+                        }
+                    }
+                    else
+                        pastedObject.Save(fileName, ImageFormat.Png);
                 }
                 Clipboard.Clear();
             }
             timer1.Enabled = true;
+        }
+
+        private void miTuningBorder_Click(object sender, EventArgs e)
+        {
+            miTuningBorder.Enabled = false;
+            var frm = new BorderSelectorForm();
+            if (Properties.Settings.Default.UseSelectedBorder)
+            {
+                frm.Location = Properties.Settings.Default.SelectedLocation;
+                frm.Size = Properties.Settings.Default.SelectedSize;
+            }
+            if (frm.ShowDialog(this) == DialogResult.OK)
+            {
+                Properties.Settings.Default.SelectedLocation = frm.Location;
+                Properties.Settings.Default.SelectedSize = frm.Size;
+                Properties.Settings.Default.Save();
+            }
+            miTuningBorder.Enabled = true;
+        }
+
+        private void contextNotifyIcon_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            miTuningBorder.Visible = Properties.Settings.Default.UseSelectedBorder;
         }
     }
 }

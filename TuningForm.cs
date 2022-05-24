@@ -24,7 +24,15 @@ namespace ScreenshotsSaver
             cbFolder.Text = selectedPath;
         }
 
+        public void Build(bool useSelectedBorder, Rectangle selectedBorder)
+        {
+            cbUseBorder.Checked = useSelectedBorder;
+            lbBorderShow.Text = $"{selectedBorder}";
+        }
+
         public string SelectedPath => cbFolder.Text;
+
+        public bool UseSelectedBorder => cbUseBorder.Checked;
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -36,5 +44,6 @@ namespace ScreenshotsSaver
                 cbFolder.Text = folderBrowserDialog1.SelectedPath;
             }
         }
+
     }
 }
